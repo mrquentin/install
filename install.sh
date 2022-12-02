@@ -30,12 +30,13 @@ git clone --bare git@github.com:mrquentin/dotfiles.git $HOME/.dotfiles-cfg
 mkdir -p .config-backup
 dot checkout
 
-if [ $? = 0 ]; then
+if [ $? = 0 ]
+then
   echo "Checked out config"
-  else
+else
     echo "Backing up pre-existing dot files ..."
-    dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/
+#     dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/
 fi
 
-dot checkout
-dot config status.showUntrackedFiles no
+# dot checkout
+# dot config status.showUntrackedFiles no
