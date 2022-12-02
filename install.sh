@@ -23,20 +23,19 @@ rm install.sh
 
 ###### dotfiles install ######
 
-function dot { /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ }
+git clone --bare https://github.com/mrquentin/dotfiles.git $HOME/.dotfiles-cfg
 
-echo "Installing dotfiles ..."
-git clone --bare git@github.com:mrquentin/dotfiles.git $HOME/.dotfiles-cfg
+config () {
+   /usr/bin/git --git-dir=$HOME/.dotfiles-cfg/ --work-tree=$HOME $@
+}
+
 mkdir -p .config-backup
-dot checkout
-
-if [ $? = 0 ]
-then
-  echo "Checked out config"
-else
-    echo "Backing up pre-existing dot files ..."
-#     dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/
-fi
-
-# dot checkout
-# dot config status.showUntrackedFiles no
+config checkout
+if [ $? = 0 ]; then
+  echo "Checked out config.";
+  else
+    echo "Backing up pre-existing dot files.";
+    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+fi;
+config checkout
+config config status.showUntrackedFiles no
