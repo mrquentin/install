@@ -30,12 +30,10 @@ git clone --bare https://github.com/mrquentin/dotfiles.git $HOME/.dotfiles-cfg
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME'
 # Backup conflicting files
 mkdir -p .config-backup && dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
-# Add alias to manipulate project
-alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME'
 # Checkout dotfiles
-dot checkout
+/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME checkout
 # Configure project to not show untracked files
-dot config --local status.showUntrackedFiles no
+/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME config --local status.showUntrackedFiles no
 
 ###### Start terminal ######
 zsh
