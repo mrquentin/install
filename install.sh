@@ -3,7 +3,7 @@
 ###### install brew ######
 
 echo "Instaling Homebrew"
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 #temporary setup of Homebrew
 echo '# Set PATH, MANPATH, etc., for Homebrew.' >> $HOME/.profile
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.profile
