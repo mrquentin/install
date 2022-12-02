@@ -17,7 +17,9 @@ brew install zsh exa goto starship helix
 ###### install oh-my-zsh ######
 
 echo "Installing Oh-my-zsh ..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended 
+curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh --output install.sh
+sh install.sh --unattended --keep-zshrc
+rm install.sh
 
 ###### dotfiles install ######
 
