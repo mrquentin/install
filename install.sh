@@ -12,7 +12,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ###### install packages ######
 
 echo "Installing packages ..."
-brew install zsh exa goto starship helix
+brew install zsh exa goto starship helix direnv
 
 ###### install oh-my-zsh ######
 
@@ -23,17 +23,17 @@ rm install.sh
 
 ###### dotfiles install ######
 
-echo "Installing dotfiles ..."
-# Clone bare project
-git clone --bare https://github.com/mrquentin/dotfiles.git $HOME/.dotfiles-cfg
-# Add alias to manipulate project
-alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME'
-# Backup conflicting files
-mkdir -p .config-backup && dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
-# Checkout dotfiles
-/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME checkout
-# Configure project to not show untracked files
-/usr/bin/git --git-dir=$HOME/.dotfiles-cfg --work-tree=$HOME config --local status.showUntrackedFiles no
+function dot { /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ }
 
-###### Start terminal ######
-zsh
+echo "Installing dotfiles ..."
+git clone --bare git@github.com:mrquentin/dotfiles.git $HOME/.dotfiles-cfg
+mkdir -p .config-backup
+dot checkout
+if [ $? = 0 ]; then
+  echo "Checked out config"
+else
+  echo "Backing up pre-existing dot files ..."
+  dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/
+fi
+dot checkout
+dot config status.showUntrackedFiles no
