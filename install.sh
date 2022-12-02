@@ -5,8 +5,8 @@
 echo "Instaling Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 #temporary setup of Homebrew
-echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /home/quentin/.profile
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/quentin/.profile
+echo '# Set PATH, MANPATH, etc., for Homebrew.' >> $HOME/.profile
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.profile
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ###### install packages ######
