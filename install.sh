@@ -31,9 +31,9 @@ mkdir -p .config-backup
 dot checkout
 
 if [ $? = 0 ]; then
-  echo "Checked out config"
+  echo "Checked out config";
 else
-  echo "Backing up pre-existing dot files ..."
+  echo "Backing up pre-existing dot files ...";
   dot checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/
 fi;
 
